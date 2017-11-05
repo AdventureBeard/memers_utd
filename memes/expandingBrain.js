@@ -21,8 +21,9 @@ class ExpandingBrainMeme {
             return null;
         } else {
             let captionMap = this._createCaptionMapping(captions);
-            let file = await this._writeCaptionsToImage(captionMap);
-            return file;
+            let image = await this._writeCaptionsToImage(captionMap);
+            let imageData = await this._getBuffer(image)
+            return imageData;
         }
     }
 
@@ -44,8 +45,7 @@ class ExpandingBrainMeme {
         captionMap.forEach((e) => {
             image.print(font, e.x, e.y, e.text, this.textMaxWidth)
         });
-        let imageData = await this._getBuffer(image);
-        return imageData;
+        return image;
     }
 
     _getBuffer(image) {
