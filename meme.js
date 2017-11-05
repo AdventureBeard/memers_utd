@@ -13,6 +13,7 @@ class Meme {
 
     async create(captions) {
         if (captions.length != this.captionCoordinates.length) {
+            // TODO Demonstrate throwing an error and all that implies here
             return null;
         } else {
             let captionMap = this._createCaptionMapping(captions);
