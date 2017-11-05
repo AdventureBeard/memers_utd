@@ -6,7 +6,7 @@ class Meme {
 
     constructor(baseImageName, captionCoordinates, captionMaxWidth) {
         this.baseImageName = baseImageName;
-        this.baseImagePath = path.join(__dirname, this.baseImageName)
+        this.baseImagePath = path.join(__dirname, 'meme_templates', this.baseImageName)
         this.captionCoordinates = captionCoordinates;
         this.captionMaxWidth = captionMaxWidth
     }

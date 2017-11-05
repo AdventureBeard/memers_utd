@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const path = require('path')
 const fs = require('fs');
 
-let Meme = require('./memes/expandingBrain');
+let Meme = require('./meme');
 
 app.use(bodyParser.json());
 
