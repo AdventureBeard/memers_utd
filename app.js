@@ -15,7 +15,7 @@ app.route('/memes/expandingbrain').get((req, res) => {
 
 app.route('/memes/expandingbrain').post(async (req, res) => {
     let body = req.body;
-    let meme = new Meme(
+    let expandingBrainMeme = new Meme(
         'expand.jpg',
         [
             [30, 100],
@@ -25,7 +25,7 @@ app.route('/memes/expandingbrain').post(async (req, res) => {
         ],
         370
     )
-    let imageData = await meme.create(body.captions)
+    let imageData = await expandingBrainMeme.create(body.captions)
     res.set('Content-Type', 'image/jpeg');
     res.end(imageData)
 });
