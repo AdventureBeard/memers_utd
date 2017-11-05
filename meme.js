@@ -5,8 +5,8 @@ const path = require('path');
 class Meme {
 
     constructor(baseImageName, captionCoordinates, captionMaxWidth) {
-        this.baseImageName = baseImageName;
-        this.baseImagePath = path.join(__dirname, 'meme_templates', this.baseImageName)
+        this.templateImageName = baseImageName;
+        this.templateImagePath = path.join(__dirname, 'meme_templates', this.templateImageName)
         this.captionCoordinates = captionCoordinates;
         this.captionMaxWidth = captionMaxWidth
     }
@@ -35,7 +35,7 @@ class Meme {
     }
 
     async _writeCaptionsToImage(captionMap) {
-        let image = await Jimp.read(this.baseImagePath);
+        let image = await Jimp.read(this.templateImagePath);
         let font = await Jimp.loadFont(Jimp.FONT_SANS_32_BLACK)
         captionMap.forEach((e) => {
             image.print(font, e.x, e.y, e.text, this.captionMaxWidth)
