@@ -2,18 +2,13 @@ const fs = require('fs');
 const Jimp = require('jimp');
 const path = require('path');
 
-class ExpandingBrainMeme {
+class Meme {
 
     constructor(baseImageName, captionCoordinates, captionMaxWidth) {
-        this.baseImageName = 'expand.jpg'
+        this.baseImageName = baseImageName;
         this.baseImagePath = path.join(__dirname, this.baseImageName)
-        this.captionCoordinates = [
-            [30, 100],
-            [30, 400],
-            [30, 700],
-            [30, 1000]
-        ]
-        this.textMaxWidth = 370
+        this.captionCoordinates = captionCoordinates;
+        this.captionMaxWidth = captionMaxWidth
     }
 
     async create(captions) {
@@ -43,7 +38,7 @@ class ExpandingBrainMeme {
         let image = await Jimp.read(this.baseImagePath);
         let font = await Jimp.loadFont(Jimp.FONT_SANS_32_BLACK)
         captionMap.forEach((e) => {
-            image.print(font, e.x, e.y, e.text, this.textMaxWidth)
+            image.print(font, e.x, e.y, e.text, this.captionMaxWidth)
         });
         return image;
     }
@@ -58,4 +53,4 @@ class ExpandingBrainMeme {
     }
 }
 
-module.exports = ExpandingBrainMeme;
+module.exports = Meme;
