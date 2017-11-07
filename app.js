@@ -26,11 +26,11 @@ app.route('/memes/expandingbrain').post(async (req, res) => {
         370
     )
     try {
-        let imageData = await expandingBrainMeme.create(body.captions)
+        let imageData = await expandingBrainMeme.create(body.captions);
         res.set('Content-Type', 'image/jpeg');
-        res.end(imageData)
+        res.end(imageData);
     } catch (e) {
-        res.status = 400
+        res.status = 400;
         res.send(e);
     }
 });

@@ -17,7 +17,7 @@ class Meme {
         } else {
             let captionMap = this._createCaptionMapping(captions);
             let image = await this._writeCaptionsToImage(captionMap);
-            let imageData = await this._getBuffer(image)
+            let imageData = await this._getBuffer(image);
             return imageData;
         }
     }
@@ -32,7 +32,7 @@ class Meme {
             }
             captionMap.push(captionMapping);
         }) 
-        return captionMap
+        return captionMap;
     }
 
     async _writeCaptionsToImage(captionMap) {
