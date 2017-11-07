@@ -5,10 +5,10 @@ const bodyParser = require('body-parser');
 const path = require('path')
 const fs = require('fs');
 
-let Meme = require('./meme');
-
 app.use(bodyParser.json());
 
+
+const Meme = require('./meme');
 app.route('/memes/expandingbrain').get((req, res) => {
     res.send("Expanding Brain endpoint");
 });
@@ -25,9 +25,14 @@ app.route('/memes/expandingbrain').post(async (req, res) => {
         ],
         370
     )
-    let imageData = await expandingBrainMeme.create(body.captions)
-    res.set('Content-Type', 'image/jpeg');
-    res.end(imageData)
+    try {
+        let imageData = await expandingBrainMeme.create(body.captions)
+        res.set('Content-Type', 'image/jpeg');
+        res.end(imageData)
+    } catch (e) {
+        res.status = 400
+        res.send(e);
+    }
 });
 
 app.listen(3000, () => console.log("Demo listening on port 3000"));

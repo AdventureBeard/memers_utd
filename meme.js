@@ -8,13 +8,12 @@ class Meme {
         this.templateImageName = baseImageName;
         this.templateImagePath = path.join(__dirname, 'meme_templates', this.templateImageName)
         this.captionCoordinates = captionCoordinates;
-        this.captionMaxWidth = captionMaxWidth
+        this.captionMaxWidth = captionMaxWidth;
     }
 
     async create(captions) {
         if (captions.length != this.captionCoordinates.length) {
-            // TODO Demonstrate throwing an error and all that implies here
-            return null;
+            throw "Wrong number of captions";
         } else {
             let captionMap = this._createCaptionMapping(captions);
             let image = await this._writeCaptionsToImage(captionMap);
@@ -26,20 +25,21 @@ class Meme {
     _createCaptionMapping(captions) {
         let captionMap = [];
         this.captionCoordinates.forEach((coords, i) => {
-            let captionMapping = {}
-            captionMapping.x = coords[0];
-            captionMapping.y = coords[1];
-            captionMapping.text = captions[i];
-            captionMap.push(captionMapping)
+            let captionMapping = {
+                x: coords[0],
+                y: coords[1],
+                text: captions[i]
+            }
+            captionMap.push(captionMapping);
         }) 
         return captionMap
     }
 
     async _writeCaptionsToImage(captionMap) {
         let image = await Jimp.read(this.templateImagePath);
-        let font = await Jimp.loadFont(Jimp.FONT_SANS_32_BLACK)
+        let font = await Jimp.loadFont(Jimp.FONT_SANS_32_BLACK);
         captionMap.forEach((e) => {
-            image.print(font, e.x, e.y, e.text, this.captionMaxWidth)
+            image.print(font, e.x, e.y, e.text, this.captionMaxWidth);
         });
         return image;
     }
