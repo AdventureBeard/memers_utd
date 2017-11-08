@@ -17,8 +17,7 @@ class Meme {
         } else {
             let captionMap = this._createCaptionMapping(captions);
             let image = await this._writeCaptionsToImage(captionMap);
-            let imageData = await this._getBuffer(image);
-            return imageData;
+            return image;
         }
     }
 
@@ -33,19 +32,10 @@ class Meme {
     async _writeCaptionsToImage(captionMap) {
         let image = await Jimp.read(this.templateImagePath);
         let font = await Jimp.loadFont(Jimp.FONT_SANS_32_BLACK);
-        captionMap.forEach((e) => {
+        captionMap.forEach((c) => {
             image.print(font, e.x, e.y, e.text, this.captionMaxWidth);
         });
         return image;
-    }
-
-    _getBuffer(image) {
-        return new Promise((resolve, reject) => {
-            image.getBuffer(Jimp.MIME_JPEG, (err, buffer) => {
-                if (err) reject();
-                resolve(buffer);
-            })
-        });
     }
 }
 
