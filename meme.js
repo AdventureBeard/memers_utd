@@ -23,16 +23,11 @@ class Meme {
     }
 
     _createCaptionMapping(captions) {
-        let captionMap = [];
-        this.captionCoordinates.forEach((coords, i) => {
-            let captionMapping = {
-                x: coords[0],
-                y: coords[1],
-                text: captions[i]
-            }
-            captionMap.push(captionMapping);
-        }) 
-        return captionMap;
+        return this.captionCoordinates.map((coords, i) => ({
+            x: coords[0],
+            y: coords[1],
+            text: captions[i]
+        }));
     }
 
     async _writeCaptionsToImage(captionMap) {
