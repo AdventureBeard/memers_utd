@@ -17,35 +17,29 @@ class Meme {
         } else {
             let captionMap = this._createCaptionMapping(captions);
             let image = await this._writeCaptionsToImage(captionMap);
-            let imageData = await this._getBuffer(image);
-            return imageData;
+            return image;
         }
     }
 
     _createCaptionMapping(captions) {
+        /*
+        OLD SKOOL
+        let captionMapping = [];
+        for (let i = 0; i < this.captionCoordinates.length; i++) {
+            captionMapping.push({
+                x: this.captionCoordinates[i][0],
+                y: this.captionCoordinates[i][1],
+                text: captions[i]
+            })
+        }
+        return captionMapping;
+        */
+
         return this.captionCoordinates.map((coords, i) => ({
             x: coords[0],
             y: coords[1],
             text: captions[i]
         }));
-    }
-
-    async _writeCaptionsToImage(captionMap) {
-        let image = await Jimp.read(this.templateImagePath);
-        let font = await Jimp.loadFont(Jimp.FONT_SANS_32_BLACK);
-        captionMap.forEach((e) => {
-            image.print(font, e.x, e.y, e.text, this.captionMaxWidth);
-        });
-        return image;
-    }
-
-    _getBuffer(image) {
-        return new Promise((resolve, reject) => {
-            image.getBuffer(Jimp.MIME_JPEG, (err, buffer) => {
-                if (err) reject();
-                resolve(buffer);
-            })
-        });
     }
 }
 
