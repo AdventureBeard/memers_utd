@@ -33,13 +33,18 @@ class Meme {
     async _writeCaptionsToImage(captionMap) {
         let image = await Jimp.read(this.templateImagePath);
         let font = await Jimp.loadFont(Jimp.FONT_SANS_32_BLACK);
-        captionMap.forEach((e) => {
-            image.print(font, e.x, e.y, e.text, this.captionMaxWidth);
+        captionMap.forEach((c) => {
+            image.print(font, c.x, c.y, c.text, this.captionMaxWidth);
         });
         return image;
     }
 
     _getBuffer(image) {
+        /* JIMP's getBuffer function doesn't return a Promise;
+        we'll need to wrap it in one of our own to keep our 
+        programming style consistent with the async await pattern
+        we're using in the create function above. */
+
         return new Promise((resolve, reject) => {
             image.getBuffer(Jimp.MIME_JPEG, (err, buffer) => {
                 if (err) reject();
