@@ -25,6 +25,8 @@ app.route('/memes/expandingbrain').post(async (req, res) => {
         ],
         370
     )
+    
+    // Here's what we expect to happen... 
     let imageData = expandingBrainMeme.create(body.captions);
     res.set('Content-Type', 'image/jpeg');
     res.end(imageData);
