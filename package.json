@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Demo app for HackersUTD presentation",
   "main": "app.js",
+  "engines": {
+      "node": "8.4.0"
+  },
   "dependencies": {
     "express": "^4.16.2",
     "jimp": "^0.2.28"
