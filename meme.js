@@ -12,13 +12,9 @@ class Meme {
     }
 
     async create(captions) {
-        if (captions.length != this.captionCoordinates.length) {
-            throw "Wrong number of captions";
-        } else {
-            let captionMap = this._createCaptionMapping(captions);
-            let image = await this._writeCaptionsToImage(captionMap);
-            return image;
-        }
+        let captionMap = this._createCaptionMapping(captions);
+        let image = await this._writeCaptionsToImage(captionMap);
+        return image;
     }
 }
 
