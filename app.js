@@ -25,14 +25,11 @@ app.route('/memes/expandingbrain').post(async (req, res) => {
         ],
         370
     )
-    try {
-        let imageData = await expandingBrainMeme.create(body.captions);
-        res.set('Content-Type', 'image/jpeg');
-        res.end(imageData);
-    } catch (e) {
-        res.status = 400;
-        res.send(e);
-    }
+    let imageData = expandingBrainMeme.create(body.captions);
+    res.set('Content-Type', 'image/jpeg');
+    res.end(imageData);
+    res.status = 400;
+    res.send(e);
 });
 
 app.listen(3000, () => console.log("Demo listening on port 3000"));
