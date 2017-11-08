@@ -25,6 +25,10 @@ app.route('/memes/expandingbrain').post(async (req, res) => {
         ],
         370
     )
+
+    /* Remember that error we threw in the Meme class? Let's catch 
+    it here and return a 400 if something goes wrong. There's a lot
+    more to error handling than this, but it's a start! */
     try {
         let imageData = await expandingBrainMeme.create(body.captions);
         res.set('Content-Type', 'image/jpeg');

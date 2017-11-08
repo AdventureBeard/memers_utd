@@ -33,8 +33,8 @@ class Meme {
     async _writeCaptionsToImage(captionMap) {
         let image = await Jimp.read(this.templateImagePath);
         let font = await Jimp.loadFont(Jimp.FONT_SANS_32_BLACK);
-        captionMap.forEach((e) => {
-            image.print(font, e.x, e.y, e.text, this.captionMaxWidth);
+        captionMap.forEach((c) => {
+            image.print(font, c.x, c.y, c.text, this.captionMaxWidth);
         });
         return image;
     }
