@@ -12,6 +12,7 @@ app.route('/memes/expandingbrain').get((req, res) => {
 });
 
 app.route('/memes/expandingbrain').post(async (req, res) => {
+    // Let's do some wishful programming... 
     let expandingBrainMeme = new Meme(
         'expand.jpg',
         [
